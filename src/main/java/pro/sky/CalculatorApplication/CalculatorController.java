@@ -18,19 +18,34 @@ public class CalculatorController {
     }
 
     @GetMapping(path = "/plus")
-    public String plusNumbers(@RequestParam Integer num1, @RequestParam Integer num2) {
+    public String plusNumbers(@RequestParam(required = false) Integer num1, @RequestParam Integer num2) {
+        if (num1 == null) {
+            return "Параметр не передан";
+        } else if (num2 == null) {
+            return "Параметр не передан";
+        }
         int result = calculatorService.plus(num1, num2);
-        return message(num1, num2, '*', result);
+        return message(num1, num2, '+', result);
     }
 
     @GetMapping(path = "/minus")
-    public String minusNumbers(@RequestParam Integer num1, @RequestParam Integer num2) {
+    public String minusNumbers(@RequestParam(required = false) Integer num1, @RequestParam Integer num2) {
+        if (num1 == null) {
+            return "Параметр не передан";
+        } else if (num2 == null) {
+            return "Параметр не передан";
+        }
         int result = calculatorService.minus(num1, num2);
         return message(num1, num2, '-', result);
     }
 
     @GetMapping(path = "/multiply")
-    public String multiplyNumbers(@RequestParam Integer num1, @RequestParam Integer num2) {
+    public String multiplyNumbers(@RequestParam(required = false) Integer num1, @RequestParam Integer num2) {
+        if (num1 == null) {
+            return "Параметр не передан";
+        } else if (num2 == null) {
+            return "Параметр не передан";
+        }
         int result = calculatorService.multiply(num1, num2);
         return message(num1, num2, '*', result);
     }
@@ -48,3 +63,5 @@ public class CalculatorController {
         return String.format("%d %c %d = %d", num1, action, num2, result);
     }
 }
+
+
