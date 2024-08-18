@@ -31,9 +31,9 @@ public class CalculatorController {
     @GetMapping(path = "/minus")
     public String minusNumbers(@RequestParam(required = false) Integer num1, @RequestParam Integer num2) {
         if (num1 == null) {
-            return "Параметр не передан";
+            return "Параметр num1 не передан";
         } else if (num2 == null) {
-            return "Параметр не передан";
+            return "Параметр num2 не передан";
         }
         int result = calculatorService.minus(num1, num2);
         return message(num1, num2, '-', result);
@@ -42,9 +42,9 @@ public class CalculatorController {
     @GetMapping(path = "/multiply")
     public String multiplyNumbers(@RequestParam(required = false) Integer num1, @RequestParam Integer num2) {
         if (num1 == null) {
-            return "Параметр не передан";
+            return "Параметр num1 не передан";
         } else if (num2 == null) {
-            return "Параметр не передан";
+            return "Параметр num2 не передан";
         }
         int result = calculatorService.multiply(num1, num2);
         return message(num1, num2, '*', result);
@@ -52,7 +52,11 @@ public class CalculatorController {
 
     @GetMapping(path = "/divide")
     public String divideNumbers(@RequestParam Integer num1, @RequestParam Integer num2) {
-        if (num2 == 0) {
+        if (num1 == null) {
+            return "Параметр num1 не передан";
+        } else if (num2 == null) {
+            return "Параметр num2 не передан";
+        } else if (num2 == 0) {
             return "Делить на 0 нельзя";
         }
         int result = calculatorService.divide(num1, num2);
