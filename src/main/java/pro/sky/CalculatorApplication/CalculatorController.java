@@ -51,13 +51,13 @@ public class CalculatorController {
     }
 
     @GetMapping(path = "/divide")
-    public String divideNumbers(@RequestParam Integer num1, @RequestParam Integer num2) {
+    public String divideNumbers(@RequestParam Integer num1, @RequestParam Integer num2) throws ZeroDivideException {
         if (num1 == null) {
             return "Параметр num1 не передан";
         } else if (num2 == null) {
             return "Параметр num2 не передан";
         } else if (num2 == 0) {
-            return "Делить на 0 нельзя";
+            throw new ZeroDivideException();
         }
         int result = calculatorService.divide(num1, num2);
         return message(num1, num2, '/', result);
